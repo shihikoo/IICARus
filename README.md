@@ -6,4 +6,4 @@ This web application is written for supporting project "IICARus", A randomised c
 
 The deployed version of the web application of IICARus project can be found at https://ecrf1.clinicaltrials.ed.ac.uk/iicarus/
 
-The web application was written by me with the collaboration of the whole CAMARADES group. 
+The web application was written by me with the collaboration of the whole CAMARADES(www.camarades.info) group. 
