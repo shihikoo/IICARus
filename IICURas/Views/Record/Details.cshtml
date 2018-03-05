@@ -1,0 +1,41 @@
+﻿@model IICURas.Models.Record
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="col-sm-10 col-sm-offset-1">
+<h2><small> The following information has been successfully recorded in the system: </small></h2>
+   </div>
+<div class="col-sm-10 col-sm-offset-1">
+
+    <dl class="dl-horizontal">
+     
+      <dt> @Html.DisplayNameFor(model => model.PaperNumber): </dt>
+        <dd> @Html.DisplayFor(model => model.PaperNumber)</dd>
+           
+     <dt>  @Html.DisplayNameFor(model => model.Country.CountryName): </dt>
+      <dd>  @Html.DisplayFor(model => model.Country.CountryName) </dd>
+
+             <dt>  @Html.DisplayNameFor(model => model.hadarrivechecklist): </dt>
+      <dd>  @Html.DisplayFor(model => model.hadarrivechecklist) </dd>
+
+        <dt>  @Html.DisplayNameFor(model => model.Comments): </dt>
+      <dd>  @Html.DisplayFor(model => model.Comments) </dd>
+
+    </dl>
+<br />    </div>
+    <div class="col-sm-12 action">
+        <h3> @ViewBag.Action</h3>
+    <br /><br />  
+</div>
+
+<div class="col-sm-10 col-sm-offset-1">
+  <h3><small>  *No changes can be made at this stage to this manuscript. If any change is needed, please contact <a href="mailto:gmorrison@plos.org">gmorrison@plos.org</a>.</small></h3>
+<br />
+    </div>
+<div class="col-sm-6 col-sm-offset-4">
+<div class="whitefont ">
+  <span>  @Html.ActionLink("Randomize a New Paper","Create", "Record", new  { @class = "btn btn-warning btn-lg"})</span> 
+     <br /><br />
+    </div>   </div>
+    <br /><br />

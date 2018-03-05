@@ -1,0 +1,97 @@
+﻿@model IICURas.Models.ReReviewItemInputModel
+
+@Html.HiddenFor(model => model.ReviewItemID)
+@Html.HiddenFor(model => model.PublicationID)
+@Html.HiddenFor(model => model.CheckListID)
+@Html.HiddenFor(model => model.CheckListNumber)
+
+@{
+    var answerStyle = Model.OptionID1 == Model.OptionID2 ? "green" : "red";
+}
+
+@if (!string.IsNullOrEmpty(Model.Section))
+{ 
+    <div class="col-xs-12 ">
+        <div class="sectionTitle">
+            <h4>
+                @Html.DisplayFor(model => model.Section)
+            </h4>
+        </div>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{ 
+    <div class="col-xs-12">
+        <h4 class="blue">
+            @if (!string.IsNullOrEmpty(Model.ItemNumber))
+            {
+                @Html.DisplayFor(model => model.ItemNumber)
+            }
+
+            @Html.Raw(@Model.Item) 
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{   
+    <div class="col-xs-12">
+        <h5>
+            @if (Model.Critical)
+            {<i class="fa fa-asterisk green" aria-hidden="true"></i>}
+            @if (!string.IsNullOrEmpty(Model.CheckListNumber))
+            {
+                if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+                }
+                else
+                {
+                    @Model.CheckListNumber
+                }
+            }
+            &nbsp
+            @Html.Raw(@Model.CheckListName)
+
+            @if (!string.IsNullOrEmpty(Model.Criteria))
+            {
+                <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria"><i class="fa fa-sm fa-question"></i>
+                </a>
+            }
+        </h5>
+    </div>
+    <br />
+    <div class="col-sm-12">
+        <div class="col-sm-4 @answerStyle">
+            @Model.Result1
+            <br />
+            @Model.Comment1
+        </div>
+
+        <div class="col-sm-4 @answerStyle">
+            @Model.Result2
+            <br />
+            @Model.Comment2
+            <br />
+        </div>
+
+        <div class="col-sm-4">
+            <div class="col-xs-12">
+                @Html.DropDownListFor(m => m.OptionID, Model.OptionList, string.Empty, new { @class = "selectpicker", title = " " })
+
+                @Html.ValidationMessageFor(model => model.OptionID)
+            </div>
+            <br class="hidden-lg hidden-md" />
+            <div class="col-xs-12">
+                @Html.TextAreaFor(model => model.Comments, new { @placeholder = "Optional Comments", @rows = 2, @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Comments)
+            </div>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+}

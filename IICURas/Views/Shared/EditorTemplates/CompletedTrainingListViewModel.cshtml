@@ -1,0 +1,30 @@
+﻿@model IICURas.Models.CompletedTrainingListViewModel
+
+<tr>
+    <td>
+    @Model.PubNumber
+        &nbsp;
+        <a href="@Url.Action("Read", new { id = Model.PubID })">
+            <i class="fa fa-file-text-o"></i>
+        </a>
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.Percentage)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.StartTime)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.CompletionTime)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.TimeUsed)
+    </td>
+    <td>
+        @Html.DisplayFor(m => m.Status)
+    </td>
+    <td>
+        <a href="@Url.Action("Transcript", new { trainingReviewid = Model.TraningReviewID })">View Transcript
+        </a>
+    </td>
+</tr>

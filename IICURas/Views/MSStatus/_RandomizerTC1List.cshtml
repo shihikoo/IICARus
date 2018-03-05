@@ -1,0 +1,56 @@
+﻿@model IEnumerable<IICURas.Models.MSStatusViewModel>
+
+<div class="cl-xs-12 table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.PaperNumber).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PaperNumber") ? "PaperNumber desc" : "PaperNumber", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.AcceptanceStatus_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "AcceptanceStatus_randomizer") ? "AcceptanceStatus_randomizer desc" : "AcceptanceStatus_randomizer", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.AuthorCompliance).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "AuthorCompliance") ? "AuthorCompliance desc" : "AuthorCompliance", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusEntryUser_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusEntryUser_randomizer") ? "StatusEntryUser_randomizer desc" : "StatusEntryUser_randomizer", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusUpdateTime_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusUpdateTime_randomizer") ? "StatusUpdateTime_randomizer desc" : "StatusUpdateTime_randomizer", searchTerm = ViewBag.searchTerm })
+
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusComments_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusComments_randomizer") ? "StatusComments_randomizer desc" : "StatusComments_randomizer", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaperNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcceptanceStatus_randomizer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorCompliance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusEntryUser_randomizer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusUpdateTime_randomizer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusComments_randomizer)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RecordID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

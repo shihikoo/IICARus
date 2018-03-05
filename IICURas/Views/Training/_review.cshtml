@@ -1,0 +1,24 @@
+﻿@model IEnumerable<IICURas.Models.TrainingReviewItemInputModel>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)  
+       
+    <div class="col-xs-12">
+        @Html.EditorForModel()
+    </div>
+   
+    <hr />
+     <br /> <br /> <br />
+    <div class="col-xs-12 text-center">
+         <br /> <br /> <br />
+            <button id="Save" type="submit" class="btn btn-warning btn-lg" name="Save">&nbsp;Save&nbsp;</button>
+           &nbsp&nbsp&nbsp           &nbsp&nbsp&nbsp
+           &nbsp&nbsp&nbsp
+
+       @*     <button id="Submit" type="submit" class="btn btn-success btn-lg" name="Submit">Save and Submit</button>*@
+    </div>
+}
+
+

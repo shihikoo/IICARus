@@ -1,0 +1,49 @@
+﻿@model IEnumerable<IICURas.Models.MSStatusViewModel>
+
+
+
+<div class="cl-xs-12 table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.PaperNumber).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PaperNumber") ? "PaperNumber desc" : "PaperNumber", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.AcceptanceStatus_randomizer).ToString(), "Index", new {sortOrder = (ViewBag.sortOrder == "AcceptanceStatus_randomizer") ? "AcceptanceStatus_randomizer desc" : "AcceptanceStatus_randomizer", searchTerm = ViewBag.searchTerm})
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusEntryUser_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusEntryUser_randomizer") ? "StatusEntryUser_randomizer desc" : "StatusEntryUser_randomizer", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.RandomisationTime).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "RandomisationTime") ? "RandomisationTime desc" : "RandomisationTime", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusUpdateTime_randomizer).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusUpdateTime_randomizer") ? "StatusUpdateTime_randomizer desc" : "StatusUpdateTime_randomizer", searchTerm = ViewBag.searchTerm })
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaperNumber)
+                </td>
+                <td>
+                    @Html.ActionLink(@Html.DisplayFor(modelItem => item.AcceptanceStatus_randomizer).ToString(), "Edit", new { id = item.RecordID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusEntryUser_randomizer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RandomisationTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusUpdateTime_randomizer)
+                </td>
+
+             
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,84 @@
+﻿@model IICURas.Models.ViewModels.ChecklistReviewViewModel
+
+
+
+@Html.DisplayFor(m => m.Rate) 
+&nbsp;&nbsp;&nbsp;&nbsp;
+@Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+<br />
+
+@*@if (!string.IsNullOrEmpty(Model.Section))
+{
+    <div class="col-xs-12 sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.Section)
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{
+    <div class="col-xs-12">
+        <h4 class="blue">
+            <strong>
+                @if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)
+                }
+
+                @Html.Raw(@Model.Item)
+            </strong>
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{
+    <div class="col-xs-12">
+        @if (Model.Rate >= 0.8)
+        {
+            <h5 class="col-xs-1 green">
+                @Html.DisplayFor(m => m.Rate)
+            </h5>
+        }
+        else if (Model.Rate >= 0.5 && Model.Rate < 0.8)
+        {
+            <h5 class="col-xs-1 blue">
+                @Html.DisplayFor(m => m.Rate)
+            </h5>
+        }
+        else
+        {
+            <h5 class="col-xs-1 red">
+                @Html.DisplayFor(m => m.Rate)
+            </h5>
+        }
+        <h5>
+            @if (Model.Critical)
+            {
+                <i class="fa fa-asterisk green" aria-hidden="true"></i>
+
+            }
+
+            @if (!string.IsNullOrEmpty(Model.CheckListNumber))
+            {
+                @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+            }
+
+            &nbsp @Html.Raw(@Model.CheckListName)
+
+            @if (!string.IsNullOrEmpty(Model.Criteria))
+            {
+                <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria">
+                    <i class="fa fa-sm fa-question"></i>
+                </a>
+            }
+
+        </h5>
+    </div>
+    <br />
+
+}
+<br />*@

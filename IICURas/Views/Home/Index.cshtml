@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Welcome to IICARus";
+}
+
+
+
+
+@if (!Request.IsAuthenticated)
+{
+@Html.Partial("_aboutPage")
+}
+
+else if (HttpContext.Current.User.IsInRole("Temp"))
+{
+    <h1 class="hometitle">
+        <small>A randomised controlled trial of an <span>I</span>ntervention to <span>I</span>mprove <span>C</span>ompliance with the <span>AR</span>RIVE g<span>u</span>ideline<span>s</span></small>
+    </h1>
+    <br />
+    <div class="alert alert-danger col-xs-12" role="alert"><h4>@ViewBag.Message</h4>
+    </div>
+}
+else {
+    <br />
+<p>
+    There are currently no more reviews available to complete. There are a small number of manuscripts still to uploaded,
+    but it is unclear at the moment whether we will be reviewing these as part of the IICARus project or not. 
+    We will send out an email  to all IICARus collaborators as soon as possible to provide a progress update and indicate if any more papers will become available for review.
+    </p>
+    <br />
+    <p> In the meantime, we would like to thank all of our IICARus collaborators who have helped us reach this stage of the project!</p>
+}

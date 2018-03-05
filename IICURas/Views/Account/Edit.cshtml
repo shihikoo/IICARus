@@ -1,0 +1,75 @@
+﻿@model IICURas.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Edit: " + @Model.UserName;
+}
+
+<section class="col-xs-10 col-xs-offset-1">
+    @using (Html.BeginForm(new { @role = "form", @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div class="row col-xs-12">
+            @Html.HiddenFor(model => model.UserName)
+
+            <div class="form-group col-xs-12">
+                @Html.LabelFor(model => model.ForeName, new { @class = "col-sm-3 control-label" })
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.ForeName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ForeName)
+                </div>
+            </div>
+            <div class="form-group  col-xs-12">
+                @Html.LabelFor(model => model.SurName, new { @class = "col-sm-3 control-label" })
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SurName)
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                @Html.LabelFor(model => model.Email, new { @class = "col-sm-3 control-label" })
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                                @Html.LabelFor(model => model.Institution, new { @class = "col-sm-3 control-label" })
+
+                <div class="col-sm-9">
+                    @Html.TextBoxFor(model => model.Institution, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Institution)
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                @Html.LabelFor(model => model.Details, new { @class = "col-sm-3 control-label" })
+
+                <div class="col-sm-9 ">
+                    @Html.TextAreaFor(model => model.Details, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Details)
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-xs-12">
+            <br />
+            <div class="col-sm-offset-5 col-sm-4">
+                <button type="submit" class="btn btn-lg btn-warning" value="SaveChanges">Save Changes</button>
+            </div>
+        </div>
+
+    }
+</section>
+
+<div class="col-xs-12">
+    <br />
+    <br />
+    <br />
+    <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+</div>

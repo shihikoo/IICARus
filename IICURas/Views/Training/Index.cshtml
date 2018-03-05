@@ -1,0 +1,142 @@
+﻿@using IICURas
+@model IICURas.Models.TrainingCoverViewModel
+
+@{
+    ViewBag.Title = "IICARus Reviewer Training Program";
+    const int passingTimes = (int) Enums.PassingCriteria.PassingTimes;
+    const int passPercentagle = (int) Enums.PassingCriteria.PassingPercentage;
+}
+<section class="row">
+
+    <div class="col-xs-12 text-center">
+        <div class="col-md-3" >
+            <span class="fa-stack fa-4x program">
+                <a href="@Url.Action("NewTraining", "Training")" class="@Model.NewTraningLinkStyle" >
+                    <i class="fa fa-circle fa-stack-2x text-success"></i>
+                    <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                </a>
+            </span>
+            <a href="@Url.Action("NewTraining", "Training")" class="cover-title @Model.NewTraningLinkStyle">
+                <h4 class="service-heading">Start a New Training</h4>
+            </a>
+            <p class="text-muted">Start a new training paper.</p>
+        </div>
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <a href="@Url.Action("OnGoingTrainingList", "Training")" class="@Model.OnoingTraningLinkStyle">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-tasks fa-stack-1x fa-inverse"></i>
+                </a>
+            </span>
+            <a href="@Url.Action("OnGoingTrainingList", "Training")" class="cover-title @Model.OnoingTraningLinkStyle">
+                <h4 class="service-heading">Continue Training</h4>
+            </a>
+            <p class="text-muted">Continue to work on training in progress.</p>
+        </div>
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <a href="@Url.Action("CompletedTrainingList", "Training")" class="@Model.CompletedTraningLinkStyle">
+                    <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                </a>
+            </span>
+            <a href="@Url.Action("CompletedTrainingList", "Training")" class="cover-title @Model.CompletedTraningLinkStyle">
+                <h4 class="service-heading">Completed Training</h4>
+            </a>
+            <p class="text-muted">View transcripts of your previous trainings.</p>
+        </div>
+
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <a href="#" data-toggle="modal" data-target="#ArchiveRecords" class="@Model.ArchiveLinkStyle">
+                    <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                    <i class="fa fa-archive fa-stack-1x fa-inverse"></i>
+                </a>
+            </span>
+            <a href="#" type="button" class="cover-title @Model.ArchiveLinkStyle" data-toggle="modal" data-target="#ArchiveRecords" >
+                <h4 class="service-heading">Archive Records</h4>
+            </a>
+            <p class="text-muted">Archive all current studies and start training all over again.</p>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="ArchiveRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Are you sure you want to archive all your records?</h4>
+                    </div>
+                    <div class="modal-body">
+                        You will not be able to see your previous records any more once you archive all your previous records.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <span class="whitefont">
+                            <a href="@Url.Action("ArchiveTraining", "Training", null)" class="btn btn-warning ">Archive
+                            </a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="col-xs-12 text-center">
+    <br />
+    <br />
+    <br />
+
+    <h3><strong>Training Program Explained </strong></h3>
+    <hr />
+    <h4>
+        To successfully complete the training program you will need to score above @passPercentagle % and answer all of the critical questions correctly on @passingTimes consecutive publications. 
+        Critical questions are marked with a star and these questions must be answered correctly to pass.
+    </h4>
+    <br />
+    <br />
+    <div class="col-xs-12 text-center">
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <i class="fa fa-folder fa-stack-2x text-info"></i>
+                <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4>Read Publications</h4>
+        </div>
+        <div class="col-md-1">
+            <span class="fa-stack fa-4x program">
+                <i class="fa fa-long-arrow-right fa-stack-1x"></i>
+            </span>
+        </div>
+
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <i class="fa fa-square fa-stack-2x text-info"></i>
+                <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+
+            </span>
+            <h4>Fill out the checklist</h4>
+        </div>
+        <div class="col-md-1">
+            <span class="fa-stack fa-4x program">
+                <i class="fa fa-long-arrow-right fa-stack-1x"></i>
+            </span>
+        </div>
+        <div class="col-md-3">
+            <span class="fa-stack fa-4x program">
+                <i class="fa fa-star fa-stack-2x text-info"></i>
+                <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+            </span>
+            <h4>Review the correct answers</h4>
+        </div>
+        <br />
+    </div>
+
+    <div class="col-xs-12 text-center">
+        <br />
+        <h4 class="blue">Please read the <a href="~/IICARusResource.pdf" target="_blank">review resource</a> before starting review publications.</h4>
+        <h4>There are 10 training publications available online.
+            You will be assigned one publication at random each time you start a new training session. 
+       You may archive your previous records and re-start the training if you do not meet the requirements after completing all 10 publications. </h4>
+    </div>
+</section>

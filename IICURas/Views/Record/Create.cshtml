@@ -1,0 +1,85 @@
+﻿@model IICURas.Models.RecordViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm(new { @role = "form", @class = "form-horizontal" })){
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Record</legend>
+
+        <div  class="form-group row">
+         
+            @Html.LabelFor(model => model.PaperNumber, new{@class =  "col-sm-offset-2 col-sm-3 control-label "})
+            <div class="col-sm-4  col-sm-offset-1">
+                @Html.TextBoxFor(model => model.PaperNumber, new {@class="form-control"})  &nbsp&nbsp&nbsp&nbsp&nbsp
+                @Html.ValidationMessageFor(model => model.PaperNumber)     
+            </div> </div>   
+        
+        <div class="form-group row">
+            @Html.LabelFor(model => model.AnimalResearch, new{@class =  "col-sm-5 col-sm-offset-2 control-label"}) 
+              <div class="col-sm-4">
+            @Html.CheckBoxFor(model => model.AnimalResearch, new {@class="input-group-addon"})  &nbsp&nbsp&nbsp&nbsp&nbsp
+             @Html.ValidationMessageFor(model => model.AnimalResearch)  
+      </div></div>
+                          
+         <div class="form-group row" >
+            @Html.LabelFor(model => model.trialflag, new{@class =  "col-sm-5 col-sm-offset-2 control-label"}) 
+              <div class="col-sm-4">
+            @Html.EditorFor(model => model.trialflag, new {@class="input-group-addon"}) &nbsp&nbsp&nbsp&nbsp&nbsp
+            @Html.ValidationMessageFor(model => model.trialflag)
+        </div></div>
+              
+         <div class="form-group row">
+            @Html.LabelFor(m => m.hadarrivechecklist, new{@class =  "col-sm-5 col-sm-offset-2 control-label"}) 
+              <div class="col-sm-4">
+    
+            @Html.DropDownListFor(m => m.hadarrivechecklist,  new SelectList(new[] { string.Empty, "Yes", "No" }))
+
+
+           @Html.ValidationMessageFor(model => model.hadarrivechecklist)
+        </div></div>
+
+            <div class="col-sm-offset-3">
+                       
+        </div> 
+        <br />
+          <div class="form-group row">
+            @Html.LabelFor(model => model.CountryCountryID, new{@class =  "col-sm-4 col-sm-offset-2 control-label"})
+              <div class="col-sm-4 ">
+            @Html.DropDownListFor(m => m.CountryCountryID, (IEnumerable<SelectListItem>)ViewBag.CountryCountryID,string.Empty)
+                   </div>
+          <br />
+         @Html.ValidationMessageFor(model => model.CountryCountryID)
+          </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Comments, new{@class =  "col-sm-4 col-sm-offset-2 control-label"})
+              <div class="col-sm-4 ">
+            @Html.TextAreaFor(model => model.Comments, new {@class="form-control", @placeholder = "Optional", @rows=3})  &nbsp&nbsp&nbsp&nbsp&nbsp
+            @Html.ValidationMessageFor(model => model.Comments)  
+          </div> </div>
+
+             
+  <br /><br />
+        <div class="form-group row">
+    <div class="col-sm-offset-5 col-sm-10">
+        <button type="submit" class="btn btn-warning btn-lg">Randomize it</button>
+    </div>
+  </div>
+      
+
+    </fieldset>
+}
+
+@*<div>
+    <br />
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+

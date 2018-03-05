@@ -1,0 +1,41 @@
+﻿@model IICURas.Models.ViewModels.ReconOngoingReviewViewModel
+@{
+    ViewBag.Title = "ReconOngoingReviewViewModel";
+}
+
+
+@{
+    var speciesNumClass = ""; var ItemNumClass = ""; var submitableClass = "";
+
+    speciesNumClass = Model.SpeciesNumber > 0 ? "green" : "red";
+
+    ItemNumClass = Model.CompletedNumber >= Model.TotalNumber ? "green" : "red";
+
+    submitableClass = (Model.SpeciesNumber > 0 && Model.CompletedNumber >= Model.TotalNumber) ? "" : "disabled";
+}
+
+<tr>
+    <td>
+        @Html.DisplayFor(model => model.PublicationID)
+    </td>
+    <td class="@ItemNumClass">
+        @Html.DisplayFor(model => model.CompletedNumber)/ @Html.DisplayFor(model => model.TotalNumber)
+    </td>
+    <td class="@speciesNumClass">
+
+        @Html.DisplayFor(model => model.SpeciesNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(model => model.LastUpdatedTime)
+    </td>
+    <td>
+        @Html.DisplayFor(model => model)
+    </td>
+    <td class="whitefont">
+        <a class="btn btn-warning whitefont" href="@Url.Action("ContinueReview", new {rcid = Model.ReviewCompletionID})">Continue</a>
+    </td>
+    <td class="whitefont ">
+        <a class="btn btn-success whitefont @submitableClass" href="@Url.Action("SubmitReview", new {rcid = Model.ReviewCompletionID})">Submit</a>
+    </td>
+</tr>
+

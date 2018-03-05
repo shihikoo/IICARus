@@ -1,0 +1,32 @@
+﻿@model IICURas.Models.ReviewListViewModel
+
+<tr class="text-center">
+    <td>@Html.DisplayFor(m => m.RecordID)
+    </td>
+    <td>@Html.DisplayFor(m => m.CompleteTime)
+    </td>
+
+    <td>@Html.DisplayFor(m => m.LastupDateTime)
+    </td>
+    <td>@Html.DisplayFor(m => m.ReviewTimespan)
+    </td>
+    <td>@Html.DisplayFor(m => m.nCompletedItems)
+    </td>
+    <td>@Html.DisplayFor(m => m.nSpecies)
+    </td>
+    <td>@Html.DisplayFor(m => m.nReviewCompleted)
+    </td>
+    <td>@Html.DisplayFor(m => m.AgreementRate)
+    </td>
+    <td>
+        @if(Model.Status == "Current") { 
+        <a class="btn btn-warning whitefont" href="@Url.Action("ArchiveReview","Review",new {reviewCompletionID = Model.ReviewComplesionID} )">
+            Archvie
+        </a>}
+        else {
+        <a class="btn btn-success whitefont" href="@Url.Action("UnarchiveReview","Review",new {reviewCompletionID = Model.ReviewComplesionID} )">
+            Unarchvie
+        </a>
+        }
+    </td>
+</tr>

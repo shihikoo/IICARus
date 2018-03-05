@@ -1,0 +1,89 @@
+﻿@model IICURas.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm(new { @role = "form", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="form-group col-xs-12">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "Username", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.UserName)
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            @Html.LabelFor(m => m.Password, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Password)
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm Password", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword)
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Email)
+            </div>
+        </div>
+        <div class="form-group col-xs-12">
+            @Html.LabelFor(m => m.ConfirmEmail, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.ConfirmEmail, new { @placeholder = "Confirm Email", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ConfirmEmail)
+            </div>
+        </div>
+        <hr />
+        <div class="form-group col-xs-12 ">
+            @Html.LabelFor(m => m.ForeName, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.ForeName, new { @placeholder = "Forename", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ForeName)
+            </div>
+        </div>
+        <div class="form-group col-xs-12 ">
+            @Html.LabelFor(m => m.SurName, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.SurName, new { @placeholder = "Surname", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SurName)
+            </div>
+        </div>
+        <div class="form-group col-xs-12 ">
+            @Html.LabelFor(m => m.Details, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextAreaFor(m => m.Details, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Details)
+            </div>
+        </div>
+        <div class="form-group col-xs-12 ">
+            @Html.LabelFor(m => m.Institution, new { @class = "col-sm-4 control-label" })
+            <div class="col-sm-8">
+                @Html.TextBoxFor(m => m.Institution, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Institution)
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="form-group col-xs-12">
+        <br />
+        <div class="col-xs-offset-6 col-xs-4">
+            <button type="submit" class="btn btn-lg btn-warning" value="Register">Register</button>
+        </div>
+    </div>
+}
+
+<div class=" row col-md-12 pull-left">
+    <p>@Html.ActionLink("Already has an account? Log in", "Login") </p>
+</div>

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<IICURas.Models.ReviewListViewModel>
+
+@{
+    ViewBag.Title = "Review Lists";
+}
+
+<table class="table text-center">
+    <tr class="text-center">
+        <th>
+    @Html.DisplayNameFor(m =>m.RecordID)
+        </th>
+        <th>@Html.DisplayNameFor(m => m.CompleteTime)</th>
+        @*<th>@Html.DisplayNameFor(m => m.CreateTime)</th>*@
+        <th>@Html.DisplayNameFor(m => m.LastupDateTime)</th>
+
+        <th>@Html.DisplayNameFor(m => m.ReviewTimespan)</th>
+        <th>@Html.DisplayNameFor(m => m.nCompletedItems)</th>
+        <th>@Html.DisplayNameFor(m => m.nSpecies)</th>
+        <th>@Html.DisplayNameFor(m => m.nReviewCompleted)</th>
+        <th>@Html.DisplayNameFor(m => m.AgreementRate)</th>
+        <th></th>
+    </tr>
+    @Html.DisplayForModel()
+
+</table>

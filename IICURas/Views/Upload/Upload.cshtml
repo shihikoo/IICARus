@@ -1,0 +1,104 @@
+﻿@model IEnumerable<IICURas.Models.UploadViewModel>
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h3>
+    @Html.DisplayNameFor(model => model.PaperNumber) :   @ViewBag.papernumber</h3>
+
+<h4>You current have <strong>@ViewBag.N documents </strong>for this manuscript</h4>
+
+@if (ViewBag.N > 0)
+{
+    <table class="table table-hover table-striped col-sm-12">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UploadUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.FileName, "DownloadDocument", new { pqid = item.PaperDocumentsID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UploadUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PaperDocumentsID })
+                </td>
+            </tr>
+        }
+    </table>
+}
+<br />
+
+<h2>Upload More Files</h2>
+<div class="col-sm-12">
+    <form method="post" enctype="multipart/form-data" id="uploadform">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false)
+        @Html.ValidationMessage("CustomError")
+      <h5 class="ErrorMessage">  @ViewBag.ErrorMessage </h5>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>@Html.DisplayNameFor(model => model.FileName)</h4>
+
+                <input hidden type="text" name="recordid" value="@TempData["RecordID"]"   />
+                <input hidden type="text" name="papernumber" value="@ViewBag.papernumber"   />
+
+                <input type="text" name="inputfilename" placeholder="Optional. Please include the extension when input a new file name" class="form-control" />
+                <h4>@Html.DisplayNameFor(model => model.Comments)</h4>
+                <textarea rows="4" placeholder="Optional" name="inputcomments" form="uploadform" class="form-control"></textarea>
+            </div>
+
+            <div class="col-sm-6">
+
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h4>@Html.DisplayNameFor(model => model.FileUpload)</h4>
+                    <input type="file" name="uploadfile"/>
+                    <p class="help-block">The maximum size of each is 100MB.</p>
+
+                    <br />
+                    <br />
+                </div>
+                <div class="col-sm-8 col-sm-offset-4">
+                    <button type="submit" class="btn btn-lg btn-warning">Upload</button>
+                    @Html.ActionLink("Reset", "Upload", "Upload", new { id = TempData["RecordID"], @class = "btn btn-default btn-lg " })</div>
+            </div>
+        </div>
+    </form>
+
+    <br />
+    <br />
+    <br />
+</div>
+
+
+
+<div class=" row col-sm-12">
+    <p>@Html.ActionLink("Back to List", "Index") </p>
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

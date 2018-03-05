@@ -1,0 +1,36 @@
+﻿@model IICURas.Models.OngoingTrainingListViewModel
+
+@{
+    var speciesNumClass = ""; var ItemNumClass = ""; var submitableClass = "";
+
+    ItemNumClass = Model.NumberOfCompletedItems >= Model.NumberOfTotalItems ? "green" : "red";
+
+    submitableClass = (Model.NumberOfCompletedItems == Model.NumberOfTotalItems) ? "" : "disabled";
+}
+
+<tr>
+    <td>
+        @Model.PubNumber
+    </td>
+    <td class="@ItemNumClass">
+        @Html.DisplayFor(m => m.NumberOfCompletedItems) / @Html.DisplayFor(m => m.NumberOfTotalItems)
+    </td>
+
+    <td>
+         @Html.DisplayFor(m => m.LastUpdatedTime)
+    </td>
+    <td class="whitefont">
+           <a class="btn btn-warning" href="@Url.Action("ContinueTraining", new { trainingReviewid = Model.TraningReviewID })">
+            Continue
+        </a>
+         </td>
+       <td class="whitefont">
+          <a class="btn btn-success  @submitableClass" href="@Url.Action("SubmitTraining", new { trainingReviewid = Model.TraningReviewID })">
+            Submit
+        </a>
+    </td>
+</tr>
+
+
+
+

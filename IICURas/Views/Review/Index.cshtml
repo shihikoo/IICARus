@@ -1,0 +1,30 @@
+﻿@model IICURas.Models.ReviewOverviewViewModel
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<div class="col-xs-12">
+    <h3>Your Review Progress</h3>
+    <div class="progress  text-center">
+        <div class="progress-bar progress-bar-success" aria-valuenow="(@Model.CompletePercentage).ToString()" aria-valuemin="0" aria-valuemax="100"  role="progressbar" style="min-width: 2em; @Model.CompletePercentageStyle">
+            <span class="sr-only">35% Complete (success)</span> @Model.CompleteNumber
+        </div>
+        <div class="progress-bar progress-bar-warning progress-bar-striped" aria-valuenow="(@Model.OngoingPercentage).ToString()" aria-valuemin="0" aria-valuemax="100"  role="progressbar" style="min-width: 2em; @Model.OngoingPercentageStyle">
+            <span class="sr-only">20% In progress (warning)</span> @Model.OngoingNumber
+        </div>
+        @Model.TodoNumber
+    </div>
+    <hr />
+</div>
+
+@Html.Partial("_OngoingReviewList", Model.OngoingReview)
+
+<div class="col-xs-12">
+    <br />
+    <br />
+
+    <div class="col-xs-4 col-xs-offset-4 whitefont @Model.NewpublictionAvailability">
+        <a class="btn btn-primary btn-lg manul-center @Model.NewpublictionAvailability" href="@Url.Action("NewReview")">Review a new publication <i class="fa fa-angle-double-right"></i></a>
+    </div>
+</div>

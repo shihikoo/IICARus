@@ -1,0 +1,31 @@
+﻿@model IICURas.Models.GoldStandardInputModel
+@{
+    ViewBag.Title = "Training Publication Numbe: " + @Model.PubNumber;
+}
+
+<div class="col-xs-12">
+    @*@Html.Partial("_editGoldStandardItem", Model.GoldStandardItemIM)*@
+    @Html.EditorFor(m => m.GoldStandardItemIM)
+</div>
+
+<hr class="col-xs-12" />
+
+<div class="col-xs-12">
+    @Html.EditorFor(m => m.ChecklistItemIM)
+</div>
+
+<div class="col-xs-12">
+    <br />
+    <br />
+    <br />
+    <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({ html: true })
+        })
+    </script>
+}

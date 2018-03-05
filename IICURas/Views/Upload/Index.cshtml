@@ -1,0 +1,66 @@
+﻿@model IEnumerable<IICURas.Models.UploadOverviewViewModel>
+
+@{
+    ViewBag.Title = "Upload Files for Manuscript";
+}
+
+
+By @DateTime.Now, <strong>@ViewBag.ActionNeededRecord</strong> out of <strong>@ViewBag.TotalRecord</strong> of manuscripts need files uploaded.
+<br />
+<br />
+<br />
+
+<form method="get">
+    <h4>@Html.DisplayNameFor(model => model.PaperNumber):
+&nbsp&nbsp
+    <input type="search" name="searchTerm" />
+        &nbsp&nbsp&nbsp
+    <button type="submit" class="btn btn-warning">Search</button></h4>
+
+</form>
+<br />
+<p>Found <strong>@Model.Count() </strong>manuscripts that contain with "@ViewBag.searchTerm"</p>
+<br />
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+  @Html.ActionLink(@Html.DisplayNameFor(model => model.PaperNumber).ToString(),"Index",new { sortOrder = (ViewBag.sortOrder == "PaperNumber")?"PaperNumber desc":"PaperNumber", searchTerm=ViewBag.searchTerm })        
+        </th>
+        <th>TC1Status</th>
+        <th>MSStatus</th>
+        <th>SpreadsheetStatus</th>
+        <th>
+  @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfDocuments).ToString(),"Index",new { sortOrder = (ViewBag.sortOrder == "NumberOfDocuments")?"NumberOfDocuments desc":"NumberOfDocuments", searchTerm=ViewBag.searchTerm })        
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaperNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TC1Status)
+                <br />@Html.DisplayFor(modelItem => item.TC1StatusComments)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MSStatus)<br />@Html.DisplayFor(modelItem => item.MSStatusComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpreadsheetStatus)<br />@Html.DisplayFor(modelItem => item.SpreadsheetStatusComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfDocuments)
+            </td>
+
+            <td>
+                @Html.ActionLink("View/Upload Files", "Upload", new { id = item.RecordRecordID })
+            </td>
+        </tr>
+    }
+
+</table>

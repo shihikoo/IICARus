@@ -1,0 +1,12 @@
+﻿@model IICURas.Models.GoldStandardListViewModel
+
+
+<tr >
+    <td >
+      @Html.DisplayFor(model => model.TrainingPublicationNumber)
+    </td>
+       <td class="whitefont">
+           <a class="btn btn-primary whitefont" href="@Url.Action("GoldStandardReview", new {pubid = Model.TrainingPublicationID})">Training Result</a>
+    </td>
+</tr>
+

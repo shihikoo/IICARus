@@ -1,0 +1,43 @@
+﻿@model IICURas.Models.GoldStandardItemInputModel
+
+
+<div class="col-xs-12 col-md-4  form-group">
+    <h2 class="green">Gold Standard Item</h2>
+
+    <div class="col-xs-12">@Html.LabelFor(m => m.OptionID): @Html.DisplayFor(m => m.OptionValue)<br />
+    </div>
+    <div class="col-xs-12">@Html.LabelFor(m => m.Comments):@Html.DisplayFor(m => m.Comments)</div>
+</div>
+
+
+@using (Html.BeginForm("EditGoldStandardItem", "Training"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.GoldStandardID)
+
+    <div class="col-xs-12 col-md-8 form-group left-boarder">
+        <h2 class="green">Edit Gold Standard Item</h2>
+
+        <div class="col-xs-6 col-md-2">@Html.LabelFor(m => m.OptionID):</div>
+        <div class="col-xs-6 col-md-10">@Html.DropDownListFor(m => m.OptionID, Model.OptionList, string.Empty, new { @class = "form-control" })</div>
+        <div class="col-xs-12">@Html.ValidationMessageFor(model => model.OptionID)  </div>
+
+
+        <div class="col-xs-12">@Html.LabelFor(m => m.Comments):</div>
+        <div class="col-xs-12">@Html.TextAreaFor(m => m.Comments, new { @class = "form-control", @rows = "5" })</div>
+        <div class="col-xs-12">@Html.ValidationMessageFor(model => model.Comments)
+            <br />
+        </div>
+
+
+        <div class="col-xs-12">
+            <div class="pull-right">
+                <button id="Save" type="submit" class="btn btn-warning btn-lg">Save</button>
+            </div>
+        </div>
+    </div>
+    
+ 
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IICURas.Models.UploadViewModel>
+@{
+    ViewBag.Title = "Read: " + @ViewBag.papernumber;
+}
+
+   <h4>     You current have <strong> @ViewBag.N documents </strong>for this manuscript</h4> 
+
+@if (ViewBag.N > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>                
+                    @Html.ActionLink(item.FileName, "DownloadDocument", "Upload", new { pqid = item.PaperDocumentsID},null)
+                </td>
+            </tr>
+        }
+    </table>
+}
+<br />
+
+<div class=" row col-md-12">
+    <p>@Html.ActionLink("Back to List", "Index") </p>
+</div>
+

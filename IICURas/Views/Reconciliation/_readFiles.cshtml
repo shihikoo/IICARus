@@ -1,0 +1,31 @@
+﻿@model IEnumerable<IICURas.Models.ReadViewModel>
+
+<div class="col-xs-12">
+    <table class="table ">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+
+            <th>
+            </th>
+               <th>
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>     
+                    <a href="@Url.Action("DownloadDocument", new { tdid = item.TrainingDocumentID})" target="_blank"> 
+<i class="fa fa-file-text-o"> </i>  Read
+                    </a>           
+                </td>
+
+
+            </tr>
+        }
+    </table>
+        </div>

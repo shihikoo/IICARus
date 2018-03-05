@@ -1,0 +1,50 @@
+﻿@model IICURas.Models.PaperStatusViewModel
+
+@{
+    ViewBag.Title = "Edit MS Status";
+}
+
+<div class="col-sm-12 ">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+  
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.PaperNumber): </dt>
+            <dd>@Html.DisplayFor(model => model.PaperNumber)</dd>
+            <br />
+            <dt>@Html.DisplayNameFor(model => model.AcceptanceStatus): </dt>
+            <dd>@Html.DropDownListFor(m => m.AcceptanceStatus, new SelectList(new[] { string.Empty, "Accepted", "Rejected","Withdrawn" }))
+                
+                @Html.ValidationMessageFor(model => model.AcceptanceStatus)</dd>
+            <br />
+             <dt>@Html.DisplayNameFor(model => model.Doi): </dt>
+            <dd>@Html.TextBoxFor(m => m.Doi, new { @class = "form-control"})
+                
+                @Html.ValidationMessageFor(model => model.Doi)</dd>
+            <br />
+            <dt>@Html.DisplayNameFor(model => model.StatusComments) </dt>
+            <dd>@Html.TextAreaFor(model => model.StatusComments, new { @class = "form-control", @placeholder = "Optional", @rows = 3 }) </dd>
+        </dl>
+
+        <br />
+        <br />
+        <div class="col-sm-offset-5">
+            <button id="confirm" type="submit" class="btn btn-warning btn-lg">Save</button>
+            &nbsp
+         @Html.ActionLink("Cancel", "Index", "PaperStatus", new { @class = "btn btn-default btn-lg " })
+
+        </div>
+        
+    }
+    <br />
+    <br />
+
+    @Html.ActionLink("Back to List", "Index")
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

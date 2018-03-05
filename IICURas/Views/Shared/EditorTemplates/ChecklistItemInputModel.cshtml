@@ -1,0 +1,169 @@
+﻿@model IICURas.Models.ChecklistItemInputModel
+
+<h2 class="green">Checklist Item</h2>
+
+@if (Model.Section != "")
+{
+    <div class="col-xs-12 sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.Section)
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{
+    <div class="col-xs-12">
+        <h4 class="blue">
+            <strong>
+                @if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)
+                }
+
+                @Html.Raw(@Model.Item)
+            </strong>
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{
+    <div class="col-xs-12">
+        <h5>
+            @if (Model.Critical)
+            {
+                <i class="fa fa-asterisk green" aria-hidden="true"></i>
+                
+            }
+
+            @if (!string.IsNullOrEmpty(Model.CheckListNumber))
+            {
+                @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+            }
+
+            &nbsp  @Html.Raw(@Model.CheckListName)
+
+            @if (!string.IsNullOrEmpty(Model.Criteria))
+            {
+                <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria">
+                    <i class="fa fa-sm fa-question"></i>
+                </a>
+            }
+
+        </h5>
+    </div>
+    <br />
+    <hr />
+}
+<br />
+
+<h2 class="green">Edit Checklist Item</h2>
+<br />
+@using (Html.BeginForm("EditChecklistItem", "Training"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.CheckListID)
+    @Html.HiddenFor(m => m.GoldStandardID)
+    <div class="col-md-12 col-xs-12 col-sm-8">
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.Section)@Html.TextBoxFor(m => m.Section, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.ItemNumber)@Html.TextBoxFor(m => m.ItemNumber, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.Item)@Html.TextBoxFor(m => m.Item, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.CheckListNumber)@Html.TextBoxFor(m => m.CheckListNumber, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.CheckListName)@Html.TextBoxFor(m => m.CheckListName, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.Criteria)@Html.TextAreaFor(m => m.Criteria, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-xs-12 col-md-6">
+            @Html.LabelFor(m => m.Critical)@Html.CheckBoxFor(m => m.Critical, new { @class = "form-control  pull-left" })
+            <br />
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="pull-right">
+            <button id="Save" type="submit" class="btn btn-warning btn-lg">Save</button>
+        </div>
+    </div>
+}
+
+<div class="col-xs-12">
+    <h3 class="col-xs-12 green">
+        @Html.LabelFor(m => m.Options)
+        <br />
+    </h3>
+
+    <div class="col-sm-4 col-sm-offset-1">
+        <h4>Current Options:</h4>
+        <table class="table">
+            @foreach (var item in Model.CurrentOptions)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => item.OptionName) </td>
+
+                    <td>
+                        @using (Html.BeginForm("DeleteOption", "Training"))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            @Html.HiddenFor(model => model.CheckListID)
+                            @Html.HiddenFor(modelitem => item.OptionID)
+                            <input name="OptionID" value="@item.OptionID" hidden />
+                            @Html.HiddenFor(model => model.GoldStandardID)
+                            <button type="submit" class="btn btn-sm btn-danger center-block">Remove</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <br />
+    </div>
+
+    <div class="col-sm-6 col-sm-offset-1 col-xs-8">
+        <h4>Add roles</h4>
+        @using (Html.BeginForm("AddOption", "Training"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(m => m.CheckListID)
+            @Html.HiddenFor(model => model.GoldStandardID)
+            <div class="form-group col-xs-9 ">
+                @Html.DropDownListFor(m => m.AddOptionID, Model.OptionList, string.Empty, new { @class = "form-control" })
+            </div>
+            <div class="col-xs-3">
+                <button type="submit" class="btn btn-success center-block">Add</button>
+            </div>
+        }
+    </div>
+
+</div>

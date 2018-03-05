@@ -1,0 +1,36 @@
+﻿@model IICURas.Models.LostUsernameModel
+
+@{
+    ViewBag.Title = "Forgot your username?";
+}
+
+<p>Enter your email address to reset your password. You may need to check your spam folder or unblock </p>
+
+@if (ViewBag.sent == "yes")
+{
+    <div id="formSubmitSuccess" class="alert alert-success  fade in" role="alert">
+            Your Email has been sent. You should shortly recieve an email with your username if your email is in our record. Thank you.
+    </div>
+}
+
+@if (ViewBag.sent != "yes")
+{
+    <section class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2" id="LostPasswordForm">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+        
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email)
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <button type="submit" class="btn btn-warning center-block">Send Email</button>
+    
+        }
+    </section>
+}
+<br />
+ <div class="col-sm-12">
+     @Html.ActionLink("Back to Home", "Index", "Home")
+    </div>

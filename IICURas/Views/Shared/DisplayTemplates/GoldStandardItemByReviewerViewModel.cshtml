@@ -1,0 +1,19 @@
+﻿@model IICURas.Models.GoldStandardItemByReviewerViewModel
+<div class="col-xs-12">
+    <div class="col-md-4">
+        <h5 class="@Model.ColorStyle">
+            <span>@Html.DisplayFor(model => model.ReviewerUsername):</span>
+            @Html.DisplayFor(model => model.ReviewerOptionValue)
+
+        </h5>
+    </div>
+
+    <br class="hidden-lg hidden-md" />
+    <div class="col-md-4 @Model.ColorStyle">
+        <h5>
+            <span>@Html.DisplayNameFor(model => model.ReviewerComments): </span>
+        </h5>
+        <p>@Html.DisplayFor(model => model.ReviewerComments)</p>
+
+    </div>
+</div>

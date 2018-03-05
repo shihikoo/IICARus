@@ -1,0 +1,88 @@
+﻿@model IEnumerable<IICURas.Models.PaperStatusViewModel>
+
+@{
+    ViewBag.Title = "MS Status";
+}
+
+By @DateTime.Now, @ViewBag.ActionNeededRecord out of @ViewBag.TotalRecord of manuscripts need acceptance status input.
+<br />
+<br />
+<br />
+
+<form method="get">
+    <h4>@Html.DisplayNameFor(model => model.PaperNumber):&nbsp&nbsp
+
+    <input type="search" name="searchTerm" />&nbsp&nbsp&nbsp
+
+    <button type="submit" class="btn btn-warning">Search</button></h4>
+
+</form>
+<br />
+<p>Found <strong>@Model.Count() </strong>manuscripts that contain with "@ViewBag.searchTerm"</p>
+<br />
+<div class="table-responsive col-xs-12">
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.PaperNumber).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PaperNumber") ? "PaperNumber desc" : "PaperNumber", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.TC1Status).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "TC1Status") ? "TC1Status desc" : "TC1Status", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.AcceptanceStatus).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "AcceptanceStatus") ? "AcceptanceStatus desc" : "AcceptanceStatus", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusEntryUser).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusEntryUser") ? "StatusEntryUser desc" : "StatusEntryUser", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.StatusUpdateTime).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "StatusUpdateTime") ? "StatusUpdateTime desc" : "StatusUpdateTime", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Doi).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "Doi") ? "Doi desc" : "Doi", searchTerm = ViewBag.searchTerm })
+        </th>
+   @*     <th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaperNumber)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.TC1Status)
+            </td>
+            <td>
+                 @if (item.AcceptanceStatus != null)
+                 {
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.AcceptanceStatus).ToString(), "Edit", new { id = item.RecordID })
+                 }
+                 else if (item.TC1Status == "Pass TC1")
+                 {
+                @Html.ActionLink("Add", "Edit", new { id = item.RecordID })
+
+                 }
+                @*@Html.DisplayFor(modelItem => item.AcceptanceStatus)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusEntryUser)
+            </td>
+            <td>
+                
+                @Html.DisplayFor(modelItem => item.StatusUpdateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doi)
+            </td>
+           @* <td>
+                @if (item.TC1Status == "Pass TC1")
+                {
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecordID })
+                }
+            </td>*@
+        </tr>
+    }
+
+</table>
+    </div>

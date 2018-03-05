@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IICURas.Models.OngoingTrainingListViewModel>
+
+@{
+    ViewBag.Title = "List of Ongoing Training";
+}
+
+<div class="col-xs-12 table-response">
+    <table class="table  text-center">
+        <tr>
+            <th  class="text-center">
+                Publication Number
+            </th>
+            <th class="text-center">
+             Completed/Total Number of Items
+            </th>
+            <th class="text-center">
+                Last Updated Time
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        @Html.EditorForModel()
+    </table>
+</div>
+
+<div class="row col-xs-12">
+    <br />
+    <br />
+    <br />
+    <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+</div>

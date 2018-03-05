@@ -1,0 +1,6 @@
+﻿@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+{
+             @Html.ActionLink("Delete", "Delete",  new {  id = ViewBag.RecordID  })
+}
+else{
+}

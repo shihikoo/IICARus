@@ -1,0 +1,85 @@
+﻿@model IICURas.Models.RecordViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Record</legend>
+
+        <div>
+            @Html.LabelFor(model => model.PaperNumber)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.PaperNumber)
+            @Html.ValidationMessageFor(model => model.PaperNumber)
+        </div>
+        <br />
+        <br />
+        <div>
+            @Html.LabelFor(model => model.AnimalResearch)  &nbsp&nbsp&nbsp&nbsp&nbsp
+
+            @Html.EditorFor(model => model.AnimalResearch)
+            <br />
+            @Html.ValidationMessageFor(model => model.AnimalResearch)
+        </div>
+        <br />
+        <br />
+        <div>
+            @Html.LabelFor(model => model.trialflag)  &nbsp&nbsp&nbsp&nbsp&nbsp
+
+            @Html.EditorFor(model => model.trialflag)
+            <br />
+            @Html.ValidationMessageFor(model => model.trialflag)
+        </div>
+        <br />
+        <br />
+        <div>
+            @Html.LabelFor(model => model.hadarrivechecklist)  &nbsp&nbsp&nbsp&nbsp&nbsp
+
+           @Html.DropDownListFor(m => m.hadarrivechecklist, new SelectList(new[] { string.Empty, "Yes", "No" }))
+            <br />
+            @Html.ValidationMessageFor(model => model.hadarrivechecklist)
+        </div>
+        <br />
+        <br />
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CountryCountryID, "Country")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CountryCountryID", String.Empty)
+            @Html.ValidationMessageFor(model => model.CountryCountryID)
+        </div>
+        <br />
+        <br />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Comments)
+        </div>
+
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Comments, new { @placeholder = "Optional", @rows = 3 })  &nbsp&nbsp&nbsp&nbsp&nbsp
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+
+        <br />
+        <br />
+        <br />
+        <button id="confirm" type="submit" class="btn btn-warning btn-lg">Confirm </button>
+        <br />
+        <br />
+    </fieldset>
+}
+
+@*<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

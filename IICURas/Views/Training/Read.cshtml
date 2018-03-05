@@ -1,0 +1,29 @@
+﻿@model IICURas.Models.ReadListViewModel
+@{
+    ViewBag.Title = "Read";
+}
+
+@if (Model.NFiles > 1)
+{ 
+ <h3> 
+      There are <strong> @Model.NFiles  </strong> documents for this manuscript:  <strong>@Model.PaperNumber </strong>
+
+ </h3> 
+}
+else 
+{ <h3>  There is <strong> @Model.NFiles </strong> document  for this manuscript:  <strong >@Model.PaperNumber </strong>
+
+  </h3> 
+}
+  
+<br />
+     <div class="col-md-8 col-md-offset-2">
+@Html.Partial("_readFiles", Model.Files)
+
+         </div>
+
+<div class=" row col-xs-12">
+    <br /><br /><br />
+    <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+</div>
+

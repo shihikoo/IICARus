@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - IICARus </title>
+    <link href="~/logo.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="Title" content="IICARus " />
+    <meta name="Description" content="Publication Standards Review Web Application" />
+
+    @Styles.Render("~/Content/css")
+        @RenderSection("css", required: false)
+
+    @RenderSection("headjs", required: false)
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header class="black-background">
+            <div class="container">
+                <div class="pull-left">
+                    <p class="site-title">@Html.ActionLink("IICARus", "Index", "Home")</p>
+                </div>
+                <div class="pull-right" id="login">
+                    @Html.Partial("_LoginPartial")
+                </div>
+             </div>     
+        @if (Request.IsAuthenticated)
+        {
+                <nav class="container">
+                    @Html.Partial("_authorizationmenu")
+                </nav>
+        }
+    </header>
+
+<section class="container theme-showcase">
+
+    @if(ViewBag.Title != null && ViewBag.Title != "")
+    { 
+    <div class="page-header">
+        <h1>@ViewBag.Title</h1>
+    </div>
+    }
+    @RenderBody()
+</section>
+
+    <footer>
+        <div class="container">
+ 
+            <ul class="menu pull-right">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Prizes", "Reward", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <div class="pull-left">
+                <p>&copy; @DateTime.Now.Year - IICARus - All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/jqueryui")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/bootstrapjquery")
+
+      @Scripts.Render("~/bundles/bootstrapselectjquery")
+
+    @Scripts.Render("~/bundles/iicuras")
+   
+@RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        window.setInterval(function () {
+            $.post("@Url.Action("Heartbeat", "Account", new { userName = User.Identity.Name })")
+        .done(function (data) {
+
+        });
+        }, 60000);
+    </script>
+
+</body>
+</html>

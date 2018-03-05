@@ -1,0 +1,95 @@
+﻿@model IICURas.Models.RecordViewModel
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<div class="col-sm-10 col-sm-offset-1">
+<h2><small> You have entered the following information: </small></h2>
+<br />
+     </div>
+<div class="col-sm-10 col-sm-offset-1">
+ @*<dl class="dl">
+     
+      <dt> @Html.DisplayNameFor(model => model.PaperNumber): </dt>
+        <dd> @Html.DisplayFor(model => model.PaperNumber)</dd>
+           
+     <dt> @Html.DisplayNameFor(model => model.AnimalResearch):</dt>
+     <dd> @Html.DisplayFor(model => model.AnimalResearch)</dd>
+
+     <dt>  @Html.DisplayNameFor(model => model.CountryCountryName): </dt>
+      <dd>  @Html.DisplayFor(model => model.CountryCountryName) </dd>
+
+      <dt>  @Html.DisplayNameFor(model => model.trialflag): </dt>
+      <dd>  @Html.DisplayFor(model => model.trialflag) </dd>
+
+           <dt>  @Html.DisplayNameFor(model => model.hadarrivechecklist): </dt>
+      <dd>  @Html.DisplayFor(model => model.hadarrivechecklist) </dd>
+
+        <dt>  @Html.DisplayNameFor(model => model.Comments): </dt>
+      <dd>  @Html.DisplayFor(model => model.Comments) </dd>
+    </dl>
+ *@
+
+     <div>  @Html.LabelFor(model => model.PaperNumber):
+        @Html.DisplayFor(model => model.PaperNumber) </div>
+           
+  <div>     @Html.LabelFor(model => model.AnimalResearch):
+     @Html.DisplayFor(model => model.AnimalResearch)</div>
+
+   <div>     @Html.LabelFor(model => model.CountryCountryName): 
+       @Html.DisplayFor(model => model.CountryCountryName) </div>
+
+    <div>    @Html.LabelFor(model => model.trialflag): 
+      @Html.DisplayFor(model => model.trialflag) </div>
+
+          <div> @Html.LabelFor(model => model.hadarrivechecklist): 
+      @Html.DisplayFor(model => model.hadarrivechecklist) </div>
+
+    <div>     @Html.LabelFor(model => model.Comments): 
+      @Html.DisplayFor(model => model.Comments) </div>
+
+<br />
+     <div class="col-sm-8 col-sm-offset-2 whitefont">
+
+       @using (Html.BeginForm()) 
+       {
+          
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+           
+             @Html.HiddenFor(model => model.PaperNumber, new { @value=Model.PaperNumber })
+           @Html.HiddenFor(model => model.AnimalResearch, new { @value=Model.AnimalResearch })
+           @Html.HiddenFor(model => model.trialflag, new { @value=Model.trialflag })
+           @Html.HiddenFor(model => model.hadarrivechecklist, new { @value=Model.hadarrivechecklist })
+             @Html.HiddenFor(model => model.CountryCountryID, new { @Value=Model.CountryCountryID })
+           @Html.HiddenFor(model => model.CountryCountryName, new { @Value=Model.CountryCountryName })
+            @Html.HiddenFor(model => model.Comments, new { @Value=Model.Comments })
+
+           
+ <div class="col-sm-8 col-sm-offset-3">         
+ <button id="confirm" type="submit" class="btn btn-warning btn-lg">Confirm</button>
+       
+           @Html.ActionLink("Edit","Edit", "Record", new  { @class = "btn btn-default btn-lg", @id="warning-font"})
+      </div> 
+       }
+  
+
+   @*<span>  
+     @Html.ActionLink("Confirm","Details", "Record", new  { @class = "btn btn-warning btn-lg whitefont"})</span>*@ 
+
+   
+    </div>
+     
+
+<br /><br /><br /><br />
+    </div>
+  <div class="alert alert-warning col-sm-10 col-sm-offset-1" role="alert">    
+     <p>  <strong>You cannot change your input once you click the <span> confirm</span> button</strong> </p> 
+
+     </div>
+<br />
+
+
+
+      

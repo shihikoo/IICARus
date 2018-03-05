@@ -1,0 +1,32 @@
+﻿@model IICURas.Models.TranscriptViewModel
+@{
+    ViewBag.Title = "Transcript: Manuscript " + @Model.PubNumber;
+}
+
+<h4>
+    You scored @Model.Points over @Model.TotalPoints (@Html.DisplayFor(m => m.Percentage)) on @Model.CompletionTime</h4>
+    @if(Model.Pass == true) {
+    <h4 class="green">You passed  this review </h4>
+    }
+    else {
+        if (@Model.passCheatCriteria)
+        {
+            <h4 class="blue"> You did not pass this review</h4>
+        }
+        else
+        {
+            <h4 class="red"> You did not pass this review and your score is too low to view the correct answers.</h4>
+        }
+    }
+<br />
+        <div>        
+                @Html.EditorFor(m => m.Items)
+        </div>
+
+@section scripts{
+    <script>  
+        $(function () {
+            $('[data-toggle="popover"]').popover({ html: true });
+        })
+    </script>
+}

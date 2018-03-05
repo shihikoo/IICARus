@@ -1,0 +1,172 @@
+﻿@model IICURas.Models.SummaryViewModel
+
+@{
+    ViewBag.Title = "Project Progress Monitor";
+}
+
+<h5 class="col-xs-12">
+    <strong>
+        <span class="label-success whitefont">Completed</span>
+        /
+        <span class="label-danger whitefont">Excluded</span>
+        /
+        <span class="label-primary whitefont">Double Reviewed</span>
+        /
+        <span class="label-info whitefont">Single Reviewed</span>
+        /
+        <span class="label-warning whitefont">In Progress</span>
+    </strong>
+</h5>
+
+<div class="table-responsive col-xs-12">
+    <table class="table">
+        <tr>
+            <td class="col-xs-2">Randomisation</td>
+            <td class="col-xs-8">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="@Model.CompleteRandomizationStyle">
+                        @Model.numberRecords
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>TC1</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="@Model.CompletePassTC1Style">
+                        @Model.numberRecordsPassTC1
+                    </div>
+                    <div class="progress-bar progress-bar-danger" role="progressbar" style="@Model.CompleteFailTC1Style">
+                        @Model.numberRecordsFailTC1
+                    </div>
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="@Model.numberRecordsToTC1">
+                        @Model.numberRecordsToTC1
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Acceptance Decision</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="@Model.AcceptStyle">
+                        @Model.numberAccept
+                    </div>
+                    <div class="progress-bar progress-bar-danger" role="progressbar" style="@Model.NonAcceptStyle">
+                        @Model.numberNonAccept
+                    </div>
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="@Model.ToUpdateStyle"> @Model.numberToUpdate </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>File Upload</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="@Model.CompletedUploadStyle">
+                        @Model.numberUploaded
+                    </div>
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="@Model.ToUploadStyle"> @Model.numberToUpload </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Review</td>
+            <td>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" role="progressbar" style="@Model.ReconciliationCompletedStyle">
+                        @Model.numberReconciliationCompleted
+                    </div>
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="@Model.ReconciliationInProgressStyle">
+                        @Model.numberReconciliationInProgress
+                    </div>
+                    <div class="progress-bar progress-bar-primary" role="progressbar" style="@Model.DoubleReviewedStylev">
+                        @Model.numberDoubleReviewed
+                    </div>
+                    <div class="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" style="@Model.DoubleReviewInProgressStyle">
+                        @Model.numberDoubleReviewInProgress
+                    </div>
+                    <div class="progress-bar progress-bar-info" role="progressbar" style="@Model.SingleReviewedStyle">
+                        @Model.numberSingleReiewed
+                    </div>
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" style="@Model.SingleReiewedInProgressStyle">
+                        @Model.numberSingleReiewedInProgress
+                    </div>
+                    <div class="progress-bar progress-bar-warning" style="@Model.ToReviewStyle">
+                        @Model.numberToReiew
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
+    <br /><br /><br />
+</div>
+
+
+<div id="progresschart" class="col-xs-12">
+
+</div>
+
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+{ <div id="progresschartAdmin" class="col-xs-12">
+
+</div>
+}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart', 'bar', 'timeline'] });
+    google.charts.setOnLoadCallback(drawTrendlines);
+
+    function ConvertOADateToDate(oaDate) {
+        var date = new Date();
+        date.setTime((oaDate - 25569) * 24 * 3600 * 1000);
+        return date;
+    }
+
+    function drawTrendlines() {
+
+        var dataArray = @Html.Raw(Json.Encode(Model.ProgressArray));
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Number Reviewed');
+        data.addRows(10);
+        for (ii = 0; ii < 10; ii++) {
+            data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+            data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+        }
+
+        var options = {
+            title: 'Review Progress Chart',
+            height: 500,
+            colors: ['#e59400'],
+            trendlines: {
+                0: { type: 'polynomial', lineWidth: 2, opacity: 0.3, color: 'green' }
+            },
+            vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publication Reviewed'},
+            //hAxis: {  maxValue: new Date(201, 6, 1)},
+            legend: 'none'
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('progresschart'));
+        chart.draw(data, options);
+
+        var optionsAdmin = {
+            title: 'Review Projection Chart - Admin only',
+            height: 500,
+            colors: ['#e59400'],
+            trendlines: {
+                0: { type: 'linear', lineWidth: 2, opacity: 1, color: 'red' }
+            },
+            vAxis: { format: 'decimal', ticks: [0, 200, 400, 600, 800,1000,1200,1400], title: 'Number of Publication Reviewed', maxValue: 1400 },
+            hAxis: {  maxValue: new Date(2017, 5, 1)},
+            legend: 'none'
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('progresschartAdmin'));
+        chart.draw(data, optionsAdmin);
+    }
+</script>

@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Welcome to IICARus";
+}
+
+<h1 class="hometitle">   <small>A randomised controlled trial of an <span>I</span>ntervention to <span>I</span>mprove <span>C</span>ompliance with the <span>AR</span>RIVE g<span>u</span>ideline<span>s</span></small></h1>
+<br />
+
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Temp"))
+{
+    <div class="alert alert-danger" role="alert"><h4>@ViewBag.Message</h4> </div>}
+<div class="col-xs-12">
+    <p>
+        We are carrying out a randomised controlled study, <span class="text-danger bold"> IICARus </span>
+        (a randomised controlled trial of an Intervention to <span class="text-danger bold">
+            I
+        </span>mprove <span class="text-danger bold">
+            C
+        </span> with the <span class="text-danger bold">
+            AR
+        </span> g<span class="text-danger bold">u</span>ideline<span class="text-danger bold">s</span>), to assess whether mandating the completion of an ARRIVE checklist improves full compliance with the ARRIVE guidelines.
+        Manuscripts, limited to in vivo studies, will be scored by two independent reviewers against the operationalised ARRIVE checklist, blinded both to intervention status and to the scores from the other reviewer.
+        Discrepancies will be resolved by a third reviewer who will be blinded to the identity, and unblinded to the scores, of the previous reviewers.
+
+    </p>
+
+    <p>
+        It is a big project and we would like to get you involved in assessing manuscripts!
+    </p>
+
+    <p>
+        There is an online training module accompanied by a resource which is a prerequisite for becoming a reviewer for this study.
+    </p>
+    <p>
+        To register and start the training for this study please <a class="btn-warning btn-sm whitefont" href="https://ecrf1.clinicaltrials.ed.ac.uk/iicarus/Account/Register"> Sign Up </a>
+    </p>
+    <p>
+        Please register to access to the training moudule, accompanied by a resource, a prerequisite for reviewing for this study.
+    </p>
+
+    <p>
+        We would really appreciate your collaboration and support with this endeavour!
+        The resulting papers will be published in the name of the IICARus collaborators, and all individuals scoring manuscripts will be listed as collaborators (which means it comes up under your name in PubMed).
+        We expect these will be interesting and impactful papers. We plan for the listing of contributions to follow the format for the AVERT trial (<a href="http://www.ncbi.nlm.nih.gov/pubmed/25892679">http://www.ncbi.nlm.nih.gov/pubmed/25892679</a>).
+    </p>
+</div>

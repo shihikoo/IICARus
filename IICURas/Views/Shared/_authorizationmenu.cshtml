@@ -1,0 +1,85 @@
+﻿<ul class="menu">
+
+    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>*@
+ 
+
+    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Funder"))
+    {
+        <li class="authmenu">@Html.ActionLink("Raw Results", "ResultsPreview", "Summary")</li>}
+
+    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        <li class="authmenu">@Html.ActionLink("Users", "Users", "Account", routeValues: null, htmlAttributes: new {id = "userLink"})</li>
+        <li class="authmenu">@Html.ActionLink("Active Users", "ActiveUsers", "Account")</li>
+        <li class="authmenu">@Html.ActionLink("RSummary", "Summary", "Record")</li>
+        <li class="authmenu">@Html.ActionLink("Checklist Review", "ChecklistReview", "Summary")</li>
+
+        <li class="authmenu">@Html.ActionLink("Report", "Report", "Home")</li>
+        <li class="authmenu">@Html.ActionLink("Progress", "Index", "Summary")</li>
+        <li class="authmenu">@Html.ActionLink("Gold Standard List", "GoldStandardList", "Training")</li>
+        <li class="authmenu">@Html.ActionLink("Review Result", "FinalResult", "Summary")</li>
+        @*<li class="authmenu">@Html.ActionLink("Final Result", "FinalResult", "Summary") </li>*@
+
+        <li class="authmenu">@Html.ActionLink("Species Result", "SpeciesResult", "Summary")||</li>
+    }
+
+    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Randomizer") | HttpContext.Current.User.IsInRole("Administrator")))
+    {
+        <li class="authmenu">@Html.ActionLink("EO Instructions", "Instruction", "Home") </li>
+        <li class="authmenu">@Html.ActionLink("Background", "About", "Home") <span>| </span></li>
+
+        if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Randomizer")))
+         {
+             <li class="authmenu">@Html.ActionLink("Randomization", "Create", "Record")</li>
+             <li class="authmenu">@Html.ActionLink("Summary", "Index", "Record") </li>
+             <li class="authmenu">@Html.ActionLink("TC1 Status", "Index", "MSStatus") <span>| </span></li>
+        }
+        else
+        {
+            <li class="grey">Randomization</li>
+            <li class="grey">Summary</li>
+            <li class="authmenu">@Html.ActionLink("TC1 Status", "Index", "MSStatus") <span>| </span></li>
+
+        }
+        <li class="authmenu"><span>| </span>@Html.ActionLink("Queries?", "FAQ", "Home")
+            @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Administrator")))
+            {<text>||</text>}
+        </li>
+    }
+
+    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Uploader") | HttpContext.Current.User.IsInRole("Administrator")))
+    {
+ 
+        <li class="authmenu">@Html.ActionLink("MS Status", "Index", "PaperStatus")</li>
+        <li class="authmenu">@Html.ActionLink("Upload", "Index", "Upload")
+            @if (HttpContext.Current.User.IsInRole("Administrator"))
+            {<text>||</text>} </li>
+    }
+    <li class="authmenu">@Html.ActionLink("Leaderboard", "TopScore", "Summary") </li>
+    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Trainee") | HttpContext.Current.User.IsInRole("Administrator")))
+    {
+        <li class="authmenu">@Html.ActionLink("Training Program", "Index", "Training")
+        </li>
+        <li class="authmenu">
+            <a href="~/IICARusResource.pdf" target="_blank">Review Resource</a>
+        </li>
+        <li class="authmenu">
+           @Html.ActionLink("FAQ", "ReviewFAQ", "Home")
+        </li>
+    }
+
+    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Reviewer") | HttpContext.Current.User.IsInRole("SeniorReviewer") | HttpContext.Current.User.IsInRole("Administrator")))
+    {
+        <li class="authmenu">@Html.ActionLink("Review", "Index", "Review")
+        </li>
+    
+    }
+
+    @if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("reconciler") | HttpContext.Current.User.IsInRole("Administrator")))
+    {
+        <li class="authmenu">
+            @Html.ActionLink("Reconciliation", "Index", "Reconciliation")
+    </li>
+
+    }
+</ul>

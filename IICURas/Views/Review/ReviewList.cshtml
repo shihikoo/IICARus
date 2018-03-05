@@ -1,0 +1,73 @@
+﻿@model IEnumerable<IICURas.Models.ReviewListViewModel>
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<div class="col-xs-12">
+    <div class="col-md-5">By @DateTime.Now, publications you have reviewed:</div>
+    <div class="col-md-6">
+        <div class="progress">
+            <div class="progress-bar-warning" role="progressbar"  aria-valuenow = "@ViewBag.CompletePercentage" aria-valuemin="10" aria-valuemax="100"  style = "@ViewBag.progressbarstyle">
+                &nbsp&nbsp&nbsp   @ViewBag.CompleteRecord/@ViewBag.TotalRecord
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <br />
+    <form method="get">
+        <h4>@Html.DisplayNameFor(model => model.PaperNumber):
+    <input type="search" name="searchTerm" />
+            &nbsp&nbsp&nbsp      
+    <button type="submit" class="btn btn-warning">Search</button></h4>
+    </form>
+</div>
+<br />
+<p>Found <strong>@Model.Count() </strong>manuscripts that contain with "@ViewBag.searchTerm"</p>
+<br />
+
+<div class="col-xs-12">
+    <table class="table table-hover table-striped">
+        <tr>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.PaperNumber).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PaperNumber") ? "PaperNumber desc" : "PaperNumber", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.SpecieCompleted).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "SpecieCompleted") ? "SpecieCompleted desc" : "SpecieCompleted", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist") ? "NumberOfCompletedChecklist desc" : "NumberOfCompletedChecklist", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.CompleteTime).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "CompleteTime") ? "CompleteTime desc" : "CompleteTime", searchTerm = ViewBag.searchTerm })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaperNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SpecieCompleted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist)/@ViewBag.numberofchecklist
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompleteTime)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Read", "Read", new { id = item.RecordID }) |
+             @Html.ActionLink("Review", "Review", new { id = item.RecordID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

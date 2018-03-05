@@ -1,0 +1,36 @@
+﻿@model IICURas.Models.GoldStandardViewModel
+@{
+    ViewBag.Title = "Gold Standard Review";
+}
+
+<div class="col-xs-12"> 
+<div class="col-md-6">
+    <h3>@Html.DisplayNameFor(model => model.PubNumber):
+    @Html.DisplayFor(model => model.PubNumber)</h3>
+</div>
+
+
+<div class="col-sm-6">
+    @Html.Partial("_readFiles", Model.Files)
+
+</div>
+    </div>
+        <div class="col-xs-12">        
+            @Html.DisplayFor(m => m.GoldStandardItems)
+        </div>
+
+<div class="col-xs-12">
+    <br />
+    <br />
+    <br />
+    <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+
+</div>
+
+@section scripts{
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({ html: true })
+        })
+    </script>
+}

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<IICURas.Models.ReviewViewModel>
+
+@{
+    ViewBag.Title = "Review";
+}
+
+<h3>@Html.DisplayNameFor(model => model.First().PaperNumber):
+    @Html.DisplayFor(model => model.First().PaperNumber)</h3>
+
+<br />
+
+<h4><small>*You may hover over the checklist for the criteria of each checklist</small></h4>
+
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)  
+       
+    <div>
+        <div>
+            <div id="sectionTitle">
+                <h4>SPECIES</h4>
+            </div>
+            <h5>What animal species are used in this research?</h5>
+            <div>
+                @Html.ListBox("Species", ViewBag.SpecieSpecieID as MultiSelectList, new { @class = "chosen-select listbox", data_placeholder = "Choose a Specie..." })
+            </div>
+        </div>
+        <br />
+        @Html.EditorForModel()
+    </div>
+    <hr />
+    <br />
+    <br />
+    <div class="col-xs-12">
+        <div class="col-sm-2 col-sm-offset-5">
+            <button id="Save" type="submit" class="btn btn-warning btn-lg">Save</button>
+        </div>
+    </div>
+}
+<br />
+
+<div>
+    <br />
+    <br />
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section css {
+
+ @Styles.Render("~/Content/chosencss")
+
+}
+
+@section Scripts {
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover({ html: true })
+        })
+    </script>
+
+    <script src="/Scripts/chosen.jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            $(selector).chosen(config[selector]);
+        }
+    </script>
+
+}

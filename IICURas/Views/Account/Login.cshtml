@@ -1,0 +1,53 @@
+﻿@model IICURas.Models.LoginModel
+
+@{
+    ViewBag.Title = "Log in";
+}
+
+<section id="loginForm" class="col-md-4">
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.UserName)
+         </div>
+        <div class="form-group">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password , new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password)
+          </div>    
+       <div class="form-group">
+                @Html.CheckBoxFor(m => m.RememberMe, new  { @class="col-xs-4"})
+                @Html.LabelFor(m => m.RememberMe, new { @class = "col-xs-6" })
+ </div>
+        <br />
+    <div class="form-group "> 
+        <button type="submit" class="btn btn-warning btn-lg " value="Log in">Log in</button>
+
+    </div>
+}
+</section>
+
+<section   class="col-md-7">
+    <h5>IICARus is a publication quality review service. The training program is opento everyone.You may start to review as soon as you pass the training program.</h5> 
+    <br />
+       <h4>Not a IICARus member yet?
+    <span class="whitefont"> 
+           <a class="btn btn-warning " href="@Url.Action("Register")">
+          Sign Up</a></span></h4>
+    <br />
+           <h5> <a  href="@Url.Action("LostPassword")">Forget your password?         
+    </a>
+               &nbsp &nbsp
+               <a  href="@Url.Action("LostUsername")">Forget your username?</a></h5>
+</section>
+
+
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

@@ -1,0 +1,67 @@
+﻿@model IICURas.Models.Record
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<div class="col-md-10 col-md-offset-1"> 
+<table class="table table-hover table-striped ">
+    <tr >
+        <th>
+            @Html.DisplayNameFor(model => model.PaperNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.CountryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntryUser)
+        </th>
+         <th>
+            @Html.DisplayNameFor(model => model.RandomizationTime)
+        </th>
+        <th>Delete Status</th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PaperNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Country.CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Category.CategoryName)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => Model.EntryUser)
+        </td>
+         <td>
+            @Html.DisplayFor(modelItem => Model.RandomizationTime)
+        </td>
+        <td>
+            @Html.EditorFor(modelItem => Model.DeleteRecord)
+        </td>
+
+    </tr>
+
+</table>
+
+    <h4>@Html.DisplayNameFor(model => model.Comments) </h4>
+    <p>@Html.EditorFor(model => model.Comments) </p>
+        
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <div class="col-md-2 col-md-offset-10">
+     <button  type="submit" class="btn btn-warning btn-lg">Delete</button>
+         </div>
+    <br /><br />@*
+     <div class="col-md-4">
+        @Html.ActionLink("Back to List", "Index")
+     </div>*@
+
+}
+    </div>

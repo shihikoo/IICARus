@@ -1,0 +1,21 @@
+﻿@model IEnumerable<IICURas.Models.ViewModels.ReconOngoingReviewViewModel>
+
+<table class="table striped-table text-center">
+    <thead>
+        <tr>
+            <th class="text-center">Manuscript No.</th>
+            <th class="text-center">
+                Completed/Total Number of Items
+            </th>
+            <th>
+                Species Number
+            </th>
+            <th class="text-center">Last updated time</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DisplayForModel()
+    </tbody>
+</table>

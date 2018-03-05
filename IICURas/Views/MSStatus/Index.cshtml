@@ -1,0 +1,29 @@
+﻿@model IEnumerable<IICURas.Models.MSStatusViewModel>
+
+@{
+    ViewBag.Title = "TC1 Status";
+}
+
+By @DateTime.Now, @ViewBag.ActionNeededRecord out of @ViewBag.TotalRecord of manuscripts need acceptance status input.
+<br />
+<br />
+<br />
+
+
+<form method="get">
+    <div class="col-xs-12"> 
+    <h4 class="col-xs-3">@Html.DisplayNameFor(model => model.PaperNumber):</h4>
+        <div class="col-xs-6"> 
+    <input class=" form-control" type="search" name="searchTerm" />
+            </div>
+    <button type="submit" class="btn btn-warning">Search</button>
+</div>
+</form>
+
+
+<br />
+<p>Found <strong>@Model.Count() </strong>manuscripts that contain with "@ViewBag.searchTerm"</p>
+<br />
+
+@if(@User.IsInRole("Randomizer")) { @Html.Partial("_RandomizerTC1List") }
+else { @Html.Partial("_AdminTC1List") }

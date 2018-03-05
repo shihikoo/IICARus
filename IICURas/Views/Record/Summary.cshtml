@@ -1,0 +1,23 @@
+﻿@model IEnumerable<IICURas.Models.RSummaryViewModel>
+
+@{
+    ViewBag.Title = "Summary";
+}
+<div class="table-responsive">
+<table class="table table-hover table-striped">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.CountryName)</th>
+        @foreach (var category in ViewBag.CategoryList)
+        { 
+        <th> @category </th>
+        }
+    </tr>
+    @foreach (var country in ViewBag.CountryList){  
+         <tr> 
+             <td> @country </td>              
+              @foreach (var category in ViewBag.CategoryList){ <td>  @Model.Where(m=>m.CategoryName==category && m.CountryName==country).Select(m=>m.CountOfPaper).First()</td> }
+         </tr>     
+   }
+
+</table>
+    </div>

@@ -1,0 +1,92 @@
+﻿@model IICURas.Models.GoldStandardItemViewModel
+
+@if (!string.IsNullOrEmpty(Model.Section))
+{ 
+    <div class="col-xs-12">
+        <div id="sectionTitle">
+            <h4>
+                @Html.DisplayFor(model => model.Section)
+            </h4>
+        </div>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{ 
+    <div class="col-xs-12">
+        <h4 class="blue">
+            <strong>
+                @if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)
+                }
+
+                @Html.DisplayFor(model => model.Item)
+            </strong>
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{   
+    <div class="col-xs-12">
+        <h5>
+            @if (Model.Critical)
+            {<i class="fa fa-asterisk green" aria-hidden="true"></i>}
+  @if (!string.IsNullOrEmpty(Model.CheckListNumber))
+            {       
+                if (!string.IsNullOrEmpty(Model.ItemNumber))
+              {
+    @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+              } 
+              else {
+                  @Model.CheckListNumber
+                
+                }  
+            
+              
+            }
+            &nbsp
+                @Html.Raw(@Model.CheckListName)
+
+                @if (!string.IsNullOrEmpty(Model.Criteria))
+                {   
+                    <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria">
+                        <i class="fa fa-sm fa-question"></i>
+                    </a> 
+                }
+        </h5>
+    </div>
+    <br />
+    <div class="col-xs-12">
+        <div class="col-md-4">
+            <h5>
+                <span>@Html.DisplayNameFor(model => model.GSOptionValue):</span>
+                @Html.DisplayFor(model => model.GSOptionValue)
+            </h5>
+        </div>
+
+        <br class="hidden-lg hidden-md" />
+        <div class="col-md-4">
+            <h5>
+                <span>@Html.DisplayNameFor(model => model.GSComments):
+                </span>
+            </h5>
+            <p>@Html.DisplayFor(model => model.GSComments)
+            </p>
+        </div>
+        <br class="hidden-lg hidden-md" />
+        <div class="col-md-4 whitefont text-center">
+            <br />
+            <a class="btn btn-primary btn-lg " href="@Url.Action("EditGoldStandard", new { gsid = @Model.GoldStandardID })">Edit</a>
+        </div>
+    </div>
+    
+                if (Model.NReviewCompleted > 0)
+                { 
+    @Html.DisplayFor(m => m.GoldStandardItemsByReviewer)
+                }
+}
+

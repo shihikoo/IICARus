@@ -1,0 +1,82 @@
+﻿@model IICURas.Models.ViewModels.ChecklistResultViewModel
+
+
+
+
+
+@if (!string.IsNullOrEmpty(Model.Section))
+{
+    <div class="col-xs-12 sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.Section)
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{
+    <div class="col-xs-12">
+        <h4 class="blue">
+            <strong>
+                @if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)
+                }
+                @Html.Raw(@Model.Item)
+            </strong>
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{
+    <div class="col-xs-12">
+  
+        <h5>
+            @if (Model.Critical)
+            {
+                <i class="fa fa-asterisk green" aria-hidden="true"></i>
+
+            }
+
+            @if (!string.IsNullOrEmpty(Model.CheckListNumber))
+            {
+                @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+            }
+
+            &nbsp @Html.Raw(@Model.CheckListName)
+
+            @if (!string.IsNullOrEmpty(Model.Criteria))
+            {
+                <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria">
+                    <i class="fa fa-sm fa-question"></i>
+                </a>
+            }
+
+        </h5>
+    </div>
+    <div class="col-xs-12">
+        @foreach (var option in Model.OptionResultVMs)
+        {
+            var rate = option.Rate;
+            var rateStr = @String.Format("{0:P2}", rate);
+
+            var rateStyleColor = option.OptionName == "Yes" ? (rate >= 0.75 ? "green" : (rate <= 0.25 ? "red" : "text-primary")) : "black";
+
+            var optionColor = (option.OptionName == "Yes") ? "green" : (option.OptionName == "No"? "red" : "black");
+            <div class="col-xs-3 ">
+                <h4 class="">
+                    @option.OptionName
+                </h4>
+                <h5 class="@rateStyleColor ">
+                    @rateStr
+                </h5>
+            </div>       
+        }
+    </div>
+    <br />
+
+}
+<br />

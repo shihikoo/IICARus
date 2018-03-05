@@ -1,0 +1,97 @@
+﻿@model IICURas.Models.TranscriptItemViewModel
+
+
+@if (Model.Section != "")
+{
+    <div class="col-xs-12">
+        <div id="sectionTitle">
+            <h4>
+                @Html.DisplayFor(model => model.Section)
+            </h4>
+        </div>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.Item))
+{
+    <div class="col-xs-12">
+        <h4 class="blue">
+            <strong>
+                @if (!string.IsNullOrEmpty(Model.ItemNumber))
+                {
+                    @Html.DisplayFor(model => model.ItemNumber)
+                }
+                @Html.Raw(@Model.Item)
+            </strong>
+        </h4>
+    </div>
+    <br />
+}
+
+@if (!string.IsNullOrEmpty(Model.CheckListName))
+{
+    <div class="col-xs-12">
+        <h5>
+            @if (Model.Critical)
+            {<i class="fa fa-asterisk green" aria-hidden="true"></i>}
+            <strong>
+                @Html.DisplayFor(model => model.ItemNumber)<text>.</text>@Model.CheckListNumber
+            </strong>
+
+            &nbsp @Html.Raw(@Model.CheckListName)
+
+            @if (!string.IsNullOrEmpty(Model.Criteria))
+            {
+                <a tabindex="0" class="btn btn-xs btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="@Model.Criteria">
+                    <i class="fa fa-sm fa-question"></i>
+                </a>
+            }
+
+        </h5>
+    </div>
+    <br />
+    <div class="col-xs-12">
+        <div class="col-md-4">
+            <h5>
+                @if(@Model.CorrectAnswer != "") {  
+                <span>@Html.DisplayNameFor(model => model.CorrectAnswer):</span>
+                @Html.DisplayFor(model => model.CorrectAnswer)}
+            </h5>
+
+            @if (Model.Correct)
+            {
+                <h5 class="green">
+                    <span>@Html.DisplayNameFor(model => model.YourAnswer):</span>
+                    @Html.DisplayFor(model => model.YourAnswer)
+                </h5>
+            }
+            else
+            {
+                <h5 class="red">
+                    <span>@Html.DisplayNameFor(model => model.YourAnswer):</span>
+                    @Html.DisplayFor(model => model.YourAnswer)
+                </h5>
+            }
+        </div>
+
+        <br class="hidden-lg hidden-md" />
+        <div class="col-md-4">
+            <h5>
+                <span>
+                    @Html.DisplayNameFor(model => model.Comments):
+
+            </span>
+        </h5>
+        <p>@Html.DisplayFor(model => model.Comments)</p>
+
+    </div>
+    <br class="hidden-lg hidden-md" />
+    <div class="col-md-4">
+        <h5>
+            <span>@Html.DisplayNameFor(model => model.YourComments):     </span>
+        </h5>
+        <p>@Html.DisplayFor(model => model.YourComments)</p>
+    </div>
+</div>
+}

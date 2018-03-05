@@ -1,0 +1,48 @@
+﻿@model IICURas.Models.ReviewViewModel
+
+@Html.HiddenFor(model => model.PaperQualityID)
+@Html.HiddenFor(model => model.RecordRecordID)
+@Html.HiddenFor(model => model.CheckListCheckListID)
+
+
+<hr id="sep"/>
+
+@if (Model.Section.ToString() != "")
+{ 
+    
+    <div id="sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.Section)
+        </h4>
+
+    </div>
+    <br />
+}
+
+@if (Model.ItemNumber.ToString() != "")
+{ 
+    <div>
+        <h4>
+            @Html.DisplayFor(model => model.ItemNumber). @Html.DisplayFor(model => model.Item)
+        </h4>
+    </div>
+    <br />
+}
+
+
+<div>
+    <a class="checklist" data-toggle="tooltip" data-placement="top" title="@Html.DisplayFor(model => model.Criteria)">@Html.DisplayFor(model => model.CheckListName) </a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        @Html.DropDownListFor(model => model.OptionID, new SelectList(new[] { string.Empty, "Completed", "Not Completed", "Not Applicable" }))
+        @Html.ValidationMessageFor(model => model.OptionID)
+    </div>
+    <br class="hidden-lg hidden-md" />
+    <div class="col-md-8">
+        @Html.TextAreaFor(model => model.Comments, new {@placeholder = "Optional Comments", @rows = 2 })
+        @Html.ValidationMessageFor(model => model.Comments)
+    </div>
+
+</div>

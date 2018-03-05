@@ -1,0 +1,78 @@
+﻿@model IICURas.Models.MSStatusViewModel
+
+@{
+    ViewBag.Title = "TC1 Status";
+}
+
+<div class="col-sm-12 ">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        @Html.HiddenFor(model => model.RecordID)
+        @Html.HiddenFor(model => model.PaperNumber)
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.PaperNumber): </dt>
+            <dd>@Html.DisplayFor(model => model.PaperNumber)</dd>
+            <br />
+            <dt>@Html.DisplayNameFor(model => model.AcceptanceStatus_randomizer): </dt>
+            <dd>
+            @if(User.IsInRole("Administrator")){
+            @Html.DropDownListFor(m => m.AcceptanceStatus_randomizer, new SelectList(new[] { string.Empty, "Pass TC1", "Rejected at TC1", "Withdrawn at TC1","Error" }))
+                }
+                else{
+            @Html.DropDownListFor(m => m.AcceptanceStatus_randomizer, new SelectList(new[] { string.Empty, "Pass TC1", "Rejected at TC1", "Withdrawn at TC1" }))
+            }
+
+                @Html.ValidationMessageFor(model => model.AcceptanceStatus_randomizer)</dd>
+            
+@if (User.IsInRole("Randomizer"))
+{
+    if (ViewBag.action == "Yes")
+     {
+         <br/>
+         <dt>@Html.DisplayNameFor(model => model.AuthorCompliance): </dt>
+         <dd>@Html.DropDownListFor(m => m.AuthorCompliance, new SelectList(new[] {string.Empty, "Yes", "No", "N/A manuscript withdrawn/rejected at TC1"}))
+
+             @Html.ValidationMessageFor(model => model.AuthorCompliance)</dd>
+     }
+     else
+     {
+         Model.AuthorCompliance = "N/A";
+
+         @Html.HiddenFor(m => m.AuthorCompliance)
+    }
+}
+else if(User.IsInRole("Administrator"))
+        {
+        @Html.HiddenFor(m => m.AuthorCompliance)
+            
+            }
+
+    <br/>
+    <dt>@Html.DisplayNameFor(model => model.StatusComments_randomizer): </dt>
+    <dd>@Html.TextAreaFor(model => model.StatusComments_randomizer, new {@class = "form-control", @placeholder = "Optional", @rows = 3}) </dd>
+
+        </dl>
+
+        <br />
+        <br />
+        <div class="col-sm-offset-5">
+            <button id="confirm" type="submit" class="btn btn-warning btn-lg">Save</button>
+            &nbsp
+         @Html.ActionLink("Cancel", "Index", "MSStatus", new { @class = "btn btn-default btn-lg " })
+
+        </div>
+        
+    }
+    <br />
+    <br />
+
+    @Html.ActionLink("Back to List", "Index")
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
